@@ -1,0 +1,28 @@
+package com.koou.enums;
+
+import java.util.EnumMap;
+import static com.koou.enums.Input.*;
+
+/**
+ * Created by yunqiangdi on 3/15/2017.
+ */
+public enum Category {
+    MONEY(NICKEL, DIME, QUARTER, DOLLAR),
+    ITEM_SELECTION(TOOTHPASTE, CHIPS, SODA, SOAP),
+    QUIT_TRANSACTION(ABORT_TRANSACTION),
+    SHUT_DOWN(STOP);
+    private Input[] values;
+    Category(Input... types) {
+        values = types;
+    }
+    private static EnumMap<Input, Category> categorys =
+            new EnumMap<Input, Category>(Input.class);
+    static {
+        for (Category c : Category.class.getEnumConstants())
+            for (Input type : c.values)
+                categorys.put(type, c);
+    }
+    public static Category categorize(Input input) {
+        return categorys.get(input);
+    }
+}
