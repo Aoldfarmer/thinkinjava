@@ -2,10 +2,7 @@ package com.koou.chapter11;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -117,5 +114,20 @@ public class Functional {
         public Integer result() {
             return val;
         }
+    }
+
+
+    public static void main(String[] args) {
+        List<Integer> li = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        Integer result = reduce(li, new IntegerAdder());
+        System.out.println(result);
+
+        result = reduce(li, new IntegerSubtracter());
+        System.out.println(result);
+
+        System.out.println(filter(li, new GreaterThan<>(4)));
+        System.out.println(forEach(li, new MultiplyingIntegerCollector()).result());
+        System.out.println(forEach(filter(li, new GreaterThan<>(4)), new MultiplyingIntegerCollector()).result());
+
     }
 }
